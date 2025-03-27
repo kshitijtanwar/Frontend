@@ -1,12 +1,30 @@
 import { useForm } from "react-hook-form";
+import { useLoginMutation } from "../redux/api/AuthApi";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const navigate = useNavigate();
+
+    const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
+
+    useEffect(() => {
+        if (isError) {
+            toast.error("Invalid credentials");
+        }
+        if (isSuccess) {
+            navigate("/users");
+            toast.success("Login successful");
+        }
+    }, [isError, isSuccess, navigate]);
+
     const handleLogin = (data) => {
-        console.log(data);
+        login(data);
     };
     return (
         <section className="bg-black h-screen flex items-center justify-center p-4">
@@ -59,6 +77,7 @@ const Login = () => {
                         </label>
                     </div>
                     <button
+                        disabled={isLoading}
                         type="submit"
                         className="px-4 py-2 bg-white rounded-md hover:bg-neutral-200 transition-colors text-black font-semibold cursor-pointer"
                     >
