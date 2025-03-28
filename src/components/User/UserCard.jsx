@@ -21,7 +21,7 @@ const UserCard = ({
 
     return (
         <>
-            <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 mx-auto md:mx-0">
+            <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-neutral-800 mx-auto md:mx-0">
                 <img
                     className="object-cover object-center w-full h-56"
                     src={
@@ -33,7 +33,7 @@ const UserCard = ({
 
                 <div className="px-6 py-4">
                     <div className="flex items-center justify-between">
-                        <span className="text-xl font-semibold text-gray-800 dark:text-white">
+                        <span className="text-xl font-semibold text-neutral-800 dark:text-white">
                             {user.first_name} {user.last_name}
                         </span>
                         <OptionsMenu
@@ -43,12 +43,12 @@ const UserCard = ({
                         />
                     </div>
 
-                    <p className="py-2 text-gray-700 dark:text-gray-400">
+                    <p className="py-2 text-neutral-700 dark:text-neutral-400">
                         Hey I'm a user
                     </p>
 
                     <div
-                        className="flex items-center mt-4 text-gray-700 dark:text-gray-200"
+                        className="flex items-center mt-4 text-neutral-700 dark:text-neutral-200"
                         title={user.email}
                     >
                         <CiMail className="text-2xl text-white w-6 h-6 min-w-6 min-h-6" />

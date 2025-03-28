@@ -11,15 +11,6 @@ const Users = () => {
     useIsAuthenticated();
     let [searchParams] = useSearchParams();
     const page = Number(searchParams.get("page")) || 1;
-    const {
-        data: usersData,
-        isError,
-        isSuccess,
-        isFetching: isLoading,
-    } = useGetUsersQuery({ page });
-
-    const [users, setUsers] = useState(usersData?.data || []);
-
     const [
         deleteUser,
         {
@@ -29,6 +20,14 @@ const Users = () => {
             isLoading: isDeleteLoading,
         },
     ] = useDeleteUserMutation();
+    const {
+        data: usersData,
+        isError,
+        isSuccess,
+        isFetching: isLoading,
+    } = useGetUsersQuery({ page });
+
+    const [users, setUsers] = useState(usersData?.data || []);
 
     useEffect(() => {
         if (isDeleteError) {
@@ -42,6 +41,16 @@ const Users = () => {
         }
     }, [isDeleteSuccess, isDeleteError, error, isDeleteLoading]);
 
+    useEffect(() => {
+        if (isError) {
+            toast.error("Something went wrong", { id: "users" });
+        }
+        if (isSuccess) {
+            toast.success("Users fetched successfully", { id: "users" });
+            setUsers(usersData.data);
+        }
+    }, [isError, isSuccess, usersData]);
+
     const handleDelete = (id) => {
         deleteUser(id)
             .unwrap()
@@ -51,16 +60,6 @@ const Users = () => {
                 );
             });
     };
-
-    useEffect(() => {
-        if (isError) {
-            toast.error("Something went wrong", { id: "users" });
-        }
-        if (isSuccess && usersData) {
-            toast.success("Users fetched successfully", { id: "users" });
-            setUsers(usersData.data);
-        }
-    }, [isError, isSuccess, usersData]);
 
     return (
         <section className="bg-black text-white p-4 min-h-screen py-16">

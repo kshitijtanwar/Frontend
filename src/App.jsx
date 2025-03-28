@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./utils/ScrollToTop";
 import Navbar from "./components/Navbar/Navbar";
 import { useSelector } from "react-redux";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
     const { isAuthenticated } = useSelector((state) => state.auth);
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/" element={<Login />} />
                 <Route path="/users" element={<Users />} />
             </Routes>
+            <Footer />
         </Router>
     );
 };
