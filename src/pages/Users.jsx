@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import UserSkeleton from "../components/User/UserSkeleton";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../utils/Pagination";
+import SuggestedUserCard from "../components/User/SuggestedUserCard";
 
 const Users = () => {
     let [searchParams] = useSearchParams();
@@ -98,27 +99,13 @@ const Users = () => {
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4">
                             {suggestedUsers.map((user) => (
-                                <div
+                                <SuggestedUserCard
+                                    first_name={user.first_name}
+                                    last_name={user.last_name}
+                                    avatar={user.avatar}
+                                    email={user.email}
                                     key={user.id}
-                                    className="bg-neutral-900 rounded-lg p-4 flex items-center space-x-4 hover:bg-neutral-800 transition-colors"
-                                >
-                                    <img
-                                        src={user.avatar}
-                                        alt={`${user.first_name} ${user.last_name}`}
-                                        className="w-12 h-12 rounded-full object-cover"
-                                    />
-                                    <div className="flex-grow overflow-hidden">
-                                        <h3 className="font-medium truncate">
-                                            {user.first_name} {user.last_name}
-                                        </h3>
-                                        <p className="text-neutral-400 text-sm truncate">
-                                            {user.email}
-                                        </p>
-                                    </div>
-                                    <button className="ml-auto bg-white text-black px-3 py-1 rounded-full text-sm hover:bg-neutral-200 transition-colors shrink-0">
-                                        Follow
-                                    </button>
-                                </div>
+                                />
                             ))}
                         </div>
                     </div>
