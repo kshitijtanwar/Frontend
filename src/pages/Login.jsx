@@ -3,7 +3,9 @@ import { useLoginMutation } from "../redux/api/AuthApi";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useIsAuthenticated from "../hooks/useIsAuthenticated";
 const Login = () => {
+    useIsAuthenticated();
     const {
         register,
         handleSubmit,
