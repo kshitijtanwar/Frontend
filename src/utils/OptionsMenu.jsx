@@ -49,7 +49,7 @@ const StyledMenu = styled((props) => (
     },
 }));
 
-export default function OptionsMenu({ setEditOpen }) {
+export default function OptionsMenu({ setEditOpen, deleteUser, userId }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -85,7 +85,13 @@ export default function OptionsMenu({ setEditOpen }) {
                     <EditIcon />
                     Edit
                 </MenuItem>
-                <MenuItem onClick={handleClose} disableRipple>
+                <MenuItem
+                    onClick={() => {
+                        deleteUser(userId);
+                        handleClose();
+                    }}
+                    disableRipple
+                >
                     <Delete />
                     Delete
                 </MenuItem>

@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -7,16 +6,30 @@ import { ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { darkThemeModal as darkTheme } from "../constants/muiTheme";
+import { useEditUserMutation } from "../redux/api/userApi";
+import toast from "react-hot-toast";
 
-export default function EditModal({ open, setOpen, initialUser = {}, onSave }) {
+export default function EditModal({ open, setOpen, initialUser = {} }) {
     const [user, setUser] = useState({
         id: initialUser.id || null,
         first_name: initialUser.first_name || "",
         last_name: initialUser.last_name || "",
         email: initialUser.email || "",
     });
+    const [editUser, { isError, isLoading, error, isSuccess }] =
+        useEditUserMutation();
 
-    const handleClose = () => setOpen(false);
+    const handleClose = useCallback(() => setOpen(false), [setOpen]);
+    
+    useEffect(() => {
+        if (isError) {
+            toast.error(error?.data?.message || "Error updating user");
+        }
+        if (isSuccess) {
+            toast.success("User updated successfully");
+            handleClose();
+        }
+    }, [error, isError, isSuccess, handleClose]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,8 +41,7 @@ export default function EditModal({ open, setOpen, initialUser = {}, onSave }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSave(user);
-        handleClose();
+        editUser(user);
     };
 
     return (
@@ -105,6 +117,7 @@ export default function EditModal({ open, setOpen, initialUser = {}, onSave }) {
                                 color="primary"
                                 fullWidth
                                 className="sm:flex-1"
+                                disabled={isLoading}
                             >
                                 Save Changes
                             </Button>

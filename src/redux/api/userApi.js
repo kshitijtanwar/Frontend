@@ -12,7 +12,21 @@ export const userApi = createApi({
                 },
             }),
         }),
+        editUser: builder.mutation({
+            query: (user) => ({
+                url: `/users/${user.id}`,
+                method: "PUT",
+                body: user,
+            }),
+        }),
+        deleteUser: builder.mutation({
+            query: (id) => ({
+                url: `/users/${id}`,
+                method: "DELETE",
+            }),
+        }),
     }),
 });
 
-export const { useGetUsersQuery } = userApi;
+export const { useGetUsersQuery, useEditUserMutation, useDeleteUserMutation } =
+    userApi;

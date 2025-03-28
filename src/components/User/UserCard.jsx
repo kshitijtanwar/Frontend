@@ -9,6 +9,7 @@ const UserCard = ({
     first_name = "john",
     last_name = "doe",
     email = "hello@hello.com",
+    deleteUser,
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -29,7 +30,11 @@ const UserCard = ({
                         <span className="text-xl font-semibold text-gray-800 dark:text-white">
                             {first_name} {last_name}
                         </span>
-                        <OptionsMenu setEditOpen={setOpen} />
+                        <OptionsMenu
+                            userId={id}
+                            setEditOpen={setOpen}
+                            deleteUser={deleteUser}
+                        />
                     </div>
 
                     <p className="py-2 text-gray-700 dark:text-gray-400">

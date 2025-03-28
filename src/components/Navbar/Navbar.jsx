@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
                         <Link
-                            to="/"
+                            to="/users"
                             className="flex items-center justify-center gap-2 text-white font-bold"
                         >
                             <GrUserWorker className="w-8 h-8 dark:text-gray-200" />
