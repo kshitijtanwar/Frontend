@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -9,18 +9,12 @@ import { darkThemeModal as darkTheme } from "../constants/muiTheme";
 import { useEditUserMutation } from "../redux/api/userApi";
 import toast from "react-hot-toast";
 
-export default function EditModal({ open, setOpen, initialUser = {} }) {
-    const [user, setUser] = useState({
-        id: initialUser.id || null,
-        first_name: initialUser.first_name || "",
-        last_name: initialUser.last_name || "",
-        email: initialUser.email || "",
-    });
+export default function EditModal({ open, setOpen, user, setUser }) {
     const [editUser, { isError, isLoading, error, isSuccess }] =
         useEditUserMutation();
 
     const handleClose = useCallback(() => setOpen(false), [setOpen]);
-    
+
     useEffect(() => {
         if (isError) {
             toast.error(error?.data?.message || "Error updating user");
@@ -41,7 +35,9 @@ export default function EditModal({ open, setOpen, initialUser = {} }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        editUser(user);
+        editUser(user).then(() => {
+            setUser(user);
+        });
     };
 
     return (

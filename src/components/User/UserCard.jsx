@@ -12,6 +12,12 @@ const UserCard = ({
     deleteUser,
 }) => {
     const [open, setOpen] = useState(false);
+    const [user, setUser] = useState({
+        id: id || null,
+        first_name: first_name || "",
+        last_name: last_name || "",
+        email: email || "",
+    });
 
     return (
         <>
@@ -28,7 +34,7 @@ const UserCard = ({
                 <div className="px-6 py-4">
                     <div className="flex items-center justify-between">
                         <span className="text-xl font-semibold text-gray-800 dark:text-white">
-                            {first_name} {last_name}
+                            {user.first_name} {user.last_name}
                         </span>
                         <OptionsMenu
                             userId={id}
@@ -43,7 +49,7 @@ const UserCard = ({
 
                     <div
                         className="flex items-center mt-4 text-gray-700 dark:text-gray-200"
-                        title={email}
+                        title={user.email}
                     >
                         <CiMail className="text-2xl text-white w-6 h-6 min-w-6 min-h-6" />
                         <h1 className="px-2 text-sm truncate">{email}</h1>
@@ -53,7 +59,8 @@ const UserCard = ({
             <EditModal
                 open={open}
                 setOpen={setOpen}
-                initialUser={{ id, first_name, last_name, email }}
+                user={user}
+                setUser={setUser}
             />
         </>
     );
