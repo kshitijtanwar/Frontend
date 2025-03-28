@@ -3,7 +3,7 @@ import { setIsAuthenticated, setToken } from "../features/userSlice";
 
 export const authApi = createApi({
     reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://reqres.in/api" }),
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (body) => ({
