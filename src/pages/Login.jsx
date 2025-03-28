@@ -4,7 +4,9 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useLoginMutation } from "../redux/api/authApi";
+import { useSelector } from "react-redux";
 const Login = () => {
+    const { isAuthenticated } = useSelector((state) => state.auth);
     const {
         register,
         handleSubmit,
@@ -13,6 +15,12 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/users");
+        }
+    }, [isAuthenticated, navigate]);
 
     useEffect(() => {
         if (isError) {
