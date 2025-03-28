@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const useIsAuthenticated = () => {
+const AuthProvider = ({ children }) => {
     const { isAuthenticated } = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
@@ -10,8 +10,9 @@ const useIsAuthenticated = () => {
         if (!isAuthenticated) {
             navigate("/");
         }
-        
     }, [isAuthenticated, navigate]);
+
+    return isAuthenticated ? children : null;
 };
 
-export default useIsAuthenticated;
+export default AuthProvider;

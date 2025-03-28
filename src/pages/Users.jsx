@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import UserCard from "../components/User/UserCard";
-import useIsAuthenticated from "../hooks/useIsAuthenticated";
 import { useDeleteUserMutation, useGetUsersQuery } from "../redux/api/userApi";
 import toast from "react-hot-toast";
 import UserSkeleton from "../components/User/UserSkeleton";
@@ -8,7 +7,6 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "../utils/Pagination";
 
 const Users = () => {
-    useIsAuthenticated();
     let [searchParams] = useSearchParams();
     const page = Number(searchParams.get("page")) || 1;
     const [
@@ -20,6 +18,7 @@ const Users = () => {
             isLoading: isDeleteLoading,
         },
     ] = useDeleteUserMutation();
+    
     const {
         data: usersData,
         isError,
