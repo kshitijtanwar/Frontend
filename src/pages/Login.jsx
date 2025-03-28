@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useIsAuthenticated from "../hooks/useIsAuthenticated";
+import { ClipLoader } from "react-spinners";
 const Login = () => {
     useIsAuthenticated();
     const {
@@ -21,7 +22,6 @@ const Login = () => {
         }
         if (isSuccess) {
             navigate("/users");
-            toast.success("Login successful");
         }
     }, [isError, isSuccess, navigate]);
 
@@ -81,9 +81,16 @@ const Login = () => {
                     <button
                         disabled={isLoading}
                         type="submit"
-                        className="px-4 py-2 bg-white rounded-md hover:bg-neutral-200 transition-colors text-black font-semibold cursor-pointer"
+                        className="px-4 py-2 bg-white rounded-md hover:bg-neutral-200 transition-colors text-black font-semibold cursor-pointer flex items-center gap-2 justify-center"
                     >
-                        Submit
+                        {isLoading ? (
+                            <>
+                                {" "}
+                                <ClipLoader size={20} /> Logging in
+                            </>
+                        ) : (
+                            "Login"
+                        )}
                     </button>
                 </form>
             </div>

@@ -1,18 +1,19 @@
 import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const useIsAuthenticated = () => {
+    const location = useLocation();
     const { isAuthenticated } = useSelector((state) => state.auth);
     const navigate = useNavigate();
-    const location = useLocation();
 
     useEffect(() => {
         if (!isAuthenticated) {
-            const intendedPath = location.pathname;
-            navigate("/", { state: { from: intendedPath }, replace: true });
-        } else if (location.state?.from) {
-            navigate(location.state.from, { replace: true });
+            navigate("/");
+        }
+        if (location.pathname === "/" && isAuthenticated) {
+            navigate("/users");
         }
     }, [isAuthenticated, navigate, location]);
 };

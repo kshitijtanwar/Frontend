@@ -11,15 +11,12 @@ const Users = () => {
     useIsAuthenticated();
     let [searchParams] = useSearchParams();
     const page = Number(searchParams.get("page")) || 1;
-    let params = {
-        page,
-    };
     const {
         data: users,
         isError,
         isSuccess,
         isFetching: isLoading,
-    } = useGetUsersQuery(params);
+    } = useGetUsersQuery({ page });
 
     useEffect(() => {
         if (isError) {
