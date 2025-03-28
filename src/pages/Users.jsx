@@ -21,8 +21,6 @@ const Users = () => {
         isFetching: isLoading,
     } = useGetUsersQuery(params);
 
-    console.log(isLoading);
-
     useEffect(() => {
         if (isError) {
             toast.error("Something went wrong");
@@ -36,9 +34,9 @@ const Users = () => {
         <section className="bg-black text-white p-4 min-h-screen py-16">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-                    <div className="col-span-full md:col-span-2 lg:col-span-3">
-                        <h1 className="text-3xl font-bold mb-10">Users</h1>
-                    </div>
+                    <h1 className="text-3xl font-bold mb-10 col-span-full">
+                        Users
+                    </h1>
 
                     {isLoading &&
                         Array.from({ length: 6 }).map((_, index) => (
