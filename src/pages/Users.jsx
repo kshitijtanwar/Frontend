@@ -20,19 +20,23 @@ const Users = () => {
 
     useEffect(() => {
         if (isError) {
-            toast.error("Something went wrong");
+            toast.error("Something went wrong", {
+                id: "users",
+            });
         }
         if (isSuccess) {
-            toast.success("Users fetched successfully");
+            toast.success("Users fetched successfully", {
+                id: "users",
+            });
         }
     }, [isError, isSuccess]);
 
     return (
         <section className="bg-black text-white p-4 min-h-screen py-16">
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-                    <h1 className="text-3xl font-bold mb-10 col-span-full">
-                        Users
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 items-start">
+                    <h1 className="text-3xl font-bold mb-6 col-span-full">
+                        Feed
                     </h1>
 
                     {isLoading &&
