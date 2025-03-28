@@ -52,7 +52,7 @@ const UserCard = ({
                         title={user.email}
                     >
                         <CiMail className="text-2xl text-white w-6 h-6 min-w-6 min-h-6" />
-                        <h1 className="px-2 text-sm truncate">{email}</h1>
+                        <h1 className="px-2 text-sm truncate">{user.email}</h1>
                     </div>
                 </div>
             </div>
