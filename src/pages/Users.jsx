@@ -48,6 +48,7 @@ const Users = () => {
                         users?.data?.map((user) => (
                             <UserCard
                                 key={user.id}
+                                id={user.id}
                                 first_name={user.first_name}
                                 last_name={user.last_name}
                                 avatar={user.avatar}
