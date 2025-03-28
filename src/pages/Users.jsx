@@ -61,7 +61,6 @@ const Users = () => {
             });
     };
 
-    // Get suggested users (first 3 users from the list)
     const suggestedUsers = users.slice(0, 3);
 
     return (
