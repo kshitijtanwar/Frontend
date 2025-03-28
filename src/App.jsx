@@ -26,7 +26,7 @@ const App = () => {
                     }
                 />
             </Routes>
-            <Footer />
+            {isAuthenticated && <Footer />}
         </Router>
     );
 };
