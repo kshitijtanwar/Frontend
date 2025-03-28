@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import { useLoginMutation } from "../redux/api/AuthApi";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useIsAuthenticated from "../hooks/useIsAuthenticated";
 import { ClipLoader } from "react-spinners";
+import { useLoginMutation } from "../redux/api/authApi";
 const Login = () => {
     useIsAuthenticated();
     const {
