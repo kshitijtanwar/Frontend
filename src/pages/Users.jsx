@@ -62,7 +62,7 @@ const Users = () => {
             });
     };
 
-    const suggestedUsers = users.slice(0, 3);
+    const suggestedUsers = users?.slice(0, 3) || [];
 
     return (
         <section className="bg-neutral-950 text-white p-4 min-h-screen py-16">
@@ -98,19 +98,23 @@ const Users = () => {
                             Suggested Users
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4">
-                            {suggestedUsers
-                                ? suggestedUsers.map((user) => (
-                                      <SuggestedUserCard
-                                          first_name={user.first_name}
-                                          last_name={user.last_name}
-                                          avatar={user.avatar}
-                                          email={user.email}
-                                          key={user.id}
-                                      />
-                                  ))
-                                : Array.from({ length: 3 }).map((_, index) => (
-                                      <UserSuggestionSkeleton key={index} />
-                                  ))}
+                            {isLoading ? (
+                                Array.from({ length: 3 }).map((_, index) => (
+                                    <UserSuggestionSkeleton key={index} />
+                                ))
+                            ) : suggestedUsers.length > 0 ? (
+                                suggestedUsers.map((user) => (
+                                    <SuggestedUserCard
+                                        first_name={user.first_name}
+                                        last_name={user.last_name}
+                                        avatar={user.avatar}
+                                        email={user.email}
+                                        key={user.id}
+                                    />
+                                ))
+                            ) : (
+                                <p>No suggestions available</p>
+                            )}
                         </div>
                     </div>
                 </div>
