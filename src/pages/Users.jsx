@@ -6,6 +6,7 @@ import UserSkeleton from "../components/User/UserSkeleton";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "../utils/Pagination";
 import SuggestedUserCard from "../components/User/SuggestedUserCard";
+import UserSuggestionSkeleton from "../components/User/UserSuggestionSkeleton";
 
 const Users = () => {
     let [searchParams] = useSearchParams();
@@ -97,15 +98,19 @@ const Users = () => {
                             Suggested Users
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4">
-                            {suggestedUsers.map((user) => (
-                                <SuggestedUserCard
-                                    first_name={user.first_name}
-                                    last_name={user.last_name}
-                                    avatar={user.avatar}
-                                    email={user.email}
-                                    key={user.id}
-                                />
-                            ))}
+                            {suggestedUsers
+                                ? suggestedUsers.map((user) => (
+                                      <SuggestedUserCard
+                                          first_name={user.first_name}
+                                          last_name={user.last_name}
+                                          avatar={user.avatar}
+                                          email={user.email}
+                                          key={user.id}
+                                      />
+                                  ))
+                                : Array.from({ length: 3 }).map((_, index) => (
+                                      <UserSuggestionSkeleton key={index} />
+                                  ))}
                         </div>
                     </div>
                 </div>
